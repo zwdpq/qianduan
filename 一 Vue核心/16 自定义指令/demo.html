@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初始vue</title>
+    <script src="../js/vue.js" type="text/javascript"></script> 
+    <script src="../js/dayjs.min.js" type="text/javascript"></script> 
+ 
+</head>
+<body>
+    <h2>自定义指令</h2>
+    <!-- 
+        需求1：定义一个v-big指令，和v-text功能类似，
+        但会把绑定的数值放大10倍。
+				
+        需求2：定义一个v-fbind指令，和v-bind功能类似，
+        但可以让其所绑定的input元素默认获取焦点。 
+    -->
+    <div class="root">
+        <h2>{{name}}</h1>
+
+        <h2 v-text="n"></h2>
+        <hr>
+        <h2 v-big-number="n"></h2>
+        <button @click="n++">点击n自增1</button>
+        <hr>
+        <input type="text" v-fbind:value="n">
+    </div>
+
+    <script type="text/javascript">
+        'use strict';
+        //以阻止 vue 在启动时生成生产提示。
+        Vue.config.productionTip=false
+
+        let vm = new Vue({
+            el:'.root',
+            data:{
+                n:1,
+                name:'占山'
+            },
+            directives:{
+                // 函数式自定义指令
+                'big-number':function(element,binding){
+                    element.innerText = binding.value * 10
+                },
+                // 对象式自定义指令
+                /*
+                这个第一次打开页面的时候会发现input框的焦点没有聚集 
+                这是因为第一次调用focus函数的时候页面还没有input框 
+                所以自然无法对齐焦点
+                */
+                // 这种对象式的写法类似于实现了bind 于 update 没有实现 inserted
+                // fbind(element,binding){
+                //     element.value = binding.value
+                //     element.focus()
+                // }
+                //配置对象式自定义指令
+                fbind:{
+                    //指令与元素成功绑定时（一上来）
+                    bind(element, binding){
+                        console.log(1)
+                        element.value = binding.value
+                    },
+                    //指令所在元素被插入页面时
+                    inserted(element, binding){
+                        console.log(2)
+                        element.focus()
+                    },
+                    //指令所在的模板被重新解析时
+                    update(element, binding){
+                        console.log(3)
+                        element.value = binding.value
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初始vue</title>
+    <script src="../js/vue.js" type="text/javascript"></script> 
+</head>
+<body>
+
+    <div class="root">
+        姓：<input type="text" v-model= fName>
+        <br>
+        名：<input type="text" v-model= lName>
+        <br>
+        全名：<span>{{fullName()}}</span>
+    </div>
+
+    <script type="text/javascript">
+        'use strict';
+        //以阻止 vue 在启动时生成生产提示。
+        Vue.config.productionTip=false
+
+     
+        let vm = new Vue({
+           el: '.root',
+           data() {
+            return {
+                fName: '张',
+                lName: '三'
+            }
+           },
+           methods: {
+            fullName(e){
+                return this.fName.slice(0,2) + this.lName
+            }
+           }
+        })
+    </script>
+</body>
+</html>

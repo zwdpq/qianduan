@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01回顾Object.defineProperty方法</title>
+</head>
+<body>
+    <!-- 
+        通过 number 属性 与 tom 中通过Object.defineProperty方法新增的age 属性挂钩
+     -->
+    <div class="root">
+        <script type="text/javascript">
+            let number = 20
+            let cat = {
+                name: 'cat',
+                addr: 'sh',
+                age: 19
+            }
+
+            let tom = {
+                name: 'xhy',
+                addr: 'tokyo'
+            }
+
+            Object.defineProperty(tom,'age',{
+                // value: 18,
+                // enumerable:true
+                // writable:true
+                // configurable:true
+
+                get(){
+                    console.log("有人在获取tom 的 age")
+                    return number
+                },
+                // 想想在浏览器中修改了age age会不会改变
+                // 答案是不会 因为age 与 numebr 挂钩 
+                set(value){
+                    console.log("有人在修改tom 的 age",value)
+                    // 但是这样就可以
+                    number = value
+                }
+            })
+
+            console.log(cat)
+            console.log(tom)
+
+            // console.log(Object.keys(tom))
+            for (const key in tom) {
+                console.log('@',tom[key])
+            }
+        </script>
+    </div>
+</body>
+</html>

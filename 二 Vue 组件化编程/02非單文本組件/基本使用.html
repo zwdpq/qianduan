@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初始vue</title>
+    <script src="../../js/vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 第三步 编写组件标签 -->
+        <school></school>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+        // 第一步 定義組件
+        const school = Vue.extend({
+            template: `
+            <div class="demo">
+             <h2>學校名稱{{sName}}</h2>
+             <h2>學校地址{{sAddr}}</h2>
+             <button @click="showName">点我提示学校名</button>
+            </div>
+            `,
+            data() {
+                return {
+                    sName: '六中',
+                    sAddr: '安徽池州'
+                }
+            },
+            methods: {
+                showName() {
+                    alert(this.sName)
+                }
+            },
+        })
+
+        new Vue({
+            el: '#root',
+            // 第二步 注冊組件
+            components: {
+                // 'school':school
+                school
+            }
+        })
+    </script>
+</body>
+
+</html>

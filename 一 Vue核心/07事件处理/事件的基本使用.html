@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初始vue</title>
+    <script src="../../js/vue.js" type="text/javascript"></script> 
+</head>
+<body>
+
+    <div class="root">
+        <button @click="check1">点我1 无参</button>
+        <button @click="check2($event,66)">点我2 有参</button>
+    </div>
+
+    <script type="text/javascript">
+        'use strict';
+        //以阻止 vue 在启动时生成生产提示。
+        Vue.config.productionTip=false
+
+     
+        let vm = new Vue({
+           el: '.root',
+           data() {
+            return {
+                param:'占山'
+            }
+           },
+           methods: {
+            check1(event){
+                console.log(event)
+                console.log(this == vm)
+            },
+            // check1:(event)=>{
+            //     console.log(event)
+            //     console.log(this)
+            // },
+            // 点击按钮 收到页面传来的参数
+            check2(event,arg){
+                alert("收到参数"+arg)
+            }
+           },
+        })
+    </script>
+</body>
+</html>

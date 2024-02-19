@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xxx</title>
+    <script src="../js/vue.js" type="text/javascript"></script> 
+</head>
+<body>
+    <h2>人员列表</h2>
+    <div class="root">
+        <input type="text" placeholder="请输入筛选字" v-model="keyWord">
+        <ul>
+            <li v-for="(p,index) in filterProsons" :key="index">
+                {{p.name}}-{{p.age}}
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        'use strict';
+        //以阻止 vue 在启动时生成生产提示。
+        Vue.config.productionTip=false
+    
+        // watch 实现
+      /*    let vm = new Vue({
+           el: '.root',
+           data() {
+            return {
+               keyWord:'',
+               persons:[
+                {id:'001',name:'张三1',age:18},
+                {id:'002',name:'李三四1',age:19},
+                {id:'003',name:'王五2',age:20},
+                {id:'004',name:'赵五2',age:21},
+                {id:'005',name:'阿达',age:22}
+               ],
+               filterProsons:[]
+            }
+           },
+           watch:{
+            keyWord:{
+                immediate:true,
+                handler(val){
+                    this.filterProsons = this.persons.filter((p)=>{
+                        return p.name.indexOf(val) != -1;
+                })
+            }
+            }
+           }
+        })  */
+        // computer 实现
+        let vm = new Vue({
+           el: '.root',
+           data() {
+            return {
+               keyWord:'',
+               persons:[
+                {id:'001',name:'张三1',age:18},
+                {id:'002',name:'李三四1',age:19},
+                {id:'003',name:'王五2',age:20},
+                {id:'004',name:'赵五2',age:21},
+                {id:'005',name:'阿达',age:22}
+               ],
+            }
+           },
+           computed:{
+            filterProsons(){
+                return this.persons.filter((p)=>{
+                    return p.name.indexOf(this.keyWord) != -1;
+                })
+            }
+           }
+        }) 
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初始vue</title>
+    <script src="../js/vue.js" type="text/javascript"></script> 
+    <script src="../js/dayjs.min.js" type="text/javascript"></script> 
+ 
+</head>
+<body>
+    <h2>自定义指令</h2>
+    <!-- 
+        需求1：定义一个v-big指令，和v-text功能类似，
+        但会把绑定的数值放大10倍。
+				
+        需求2：定义一个v-fbind指令，和v-bind功能类似，
+        但可以让其所绑定的input元素默认获取焦点。 
+    -->
+    <div class="root">
+        <h2>{{name}}</h1>
+
+    </div>
+
+    <script type="text/javascript">
+        'use strict';
+        //以阻止 vue 在启动时生成生产提示。
+        Vue.config.productionTip=false
+
+        let vm = new Vue({
+            el:'.root',
+            data:{
+                n:1,
+                name:'占山'
+            },
+            // beforeCreate() {
+            //     console.log(vm)
+            // },
+            // created() {
+            //     console.log(vm)
+            // },
+
+            // beforeMount() {
+            //     console.log(vm)
+            // },
+
+            // mounted() {
+            //     console.log(vm)
+            // },
+        })
+    </script>
+</body>
+</html>

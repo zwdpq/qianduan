@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初始vue</title>
+    <script src="../js/vue.js" type="text/javascript"></script> 
+    <script src="../js/dayjs.min.js" type="text/javascript"></script> 
+    <!-- css -->
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>内置指令</h2>
+    <div class="root">
+        <span v-text="vText"></span>
+        <br>
+        <span v-html="vHtml"></span>
+        <br>
+        <!-- 如果网速较慢页面没有完全渲染完毕会显示丑陋的{{dataName}}。
+            添加了v-cloak搭配css会让其先隐藏，当vue实例创建完毕后删除v-cloak，
+            页面就显示正常了。 -->
+        <span v-cloak>{{vCloak}}</span>
+        <br>
+        <span v-once>vOnce的初始值为{{vOnce}}</span>
+        <span>vOnce的当前值为{{vOnce}}</span>
+        <button @click="vOnce++">vOnce自增1</button>
+        <br>
+        <!-- 跳过其所在节点的编译过程(适用于没有绑定动态数据的标签)，
+            提高性能，对于一些大项目来说比较适用。 -->
+        <span v-pre>v-pre指令</span>
+        <span v-pre>加了v-pre指令{{vPre}}</span>
+        <span >没加v-pre指令{{vPre}}</span>
+        <button @click="vPre++">vPre自增1</button>
+    </div>
+
+    <script type="text/javascript">
+        'use strict';
+        //以阻止 vue 在启动时生成生产提示。
+        Vue.config.productionTip=false
+
+        new Vue({
+            el:'.root',
+            data:{
+                vText: 'v-text指令',
+                vHtml:'<input placeholder="v-html指令"></input>',
+                vCloak:'v-cloak指令',
+                vOnce:1,
+                vPre:1
+            }
+        })
+    </script>
+</body>
+</html>
